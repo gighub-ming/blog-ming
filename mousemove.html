@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>禁用右键，禁用鼠标选中，跟随鼠标移动效果</title>
+</head>
+<style>
+	body{
+		height:3000px;
+		}
+	span{
+		position:absolute;
+		top:2px;
+		color:pink;
+		font-size:20px;
+	}
+	img{
+		position:absolute;
+		animation:donghua .1s linear infinite;
+		top:2px;
+		width:240px;
+	}
+	div{
+		width:30px;
+		}
+	@keyframes donghua{
+		50%{
+			transform:rotate(180deg);
+		}
+		70%{
+			color:blue;
+		}
+		80%{
+			color:purple;
+		}
+		100%{
+			transform:rotate(360deg);
+		}
+	}
+</style>
+<body>
+	<span>跟随鼠标移动</span>
+	<div>禁用右键</div>
+    <div>禁用鼠标选中</div>
+    <img src="../二寸照/制作2寸照片/fl.png" />
+    <input type="text" />
+    <script>
+		document.addEventListener('selectstart',function(e){
+				e.preventDefault();
+			})
+		var spans = document.querySelector('span');
+		var div = document.querySelectorAll('div');
+		var pic = document.querySelector('img');
+		var html = document.querySelector('html');
+		document.addEventListener('mousemove',function(e){
+				var x = e.pageX;
+				var y = e.pageY;
+				pic.style.top = y+10+'px';
+				pic.style.left = x+10+'px';
+			})
+		document.addEventListener('keydown',function(e){
+				console.log(e.keyCode);
+			})
+		var inp = document.querySelector('input');
+		document.addEventListener('keyup',function(e){
+				if(e.keyCode==83){
+					inp.focus();
+				}else if(e.keyCode==48){
+					inp.value = '';
+				}else if(e.keyCode==65){
+					inp.onblur();	
+				}
+			})
+    </script>
+</body>
+</html>
